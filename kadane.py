@@ -1,12 +1,11 @@
-# Python program to print largest contiguous array sum
- 
 from sys import maxsize
 from timeit import default_timer as timer
+import sys
 
 # Function to find the maximum contiguous subarray
 # and print its starting and end index
 def maxSubArraySum(a,size):
-    start = timer() 
+    startTime = timer() 
     max_so_far = -maxsize - 1
     max_ending_here = 0
     start = 0
@@ -25,12 +24,16 @@ def maxSubArraySum(a,size):
         if max_ending_here < 0:
             max_ending_here = 0
             s = i+1
-    end = timer()
+    endTime = timer()
+    run_time = endTime - startTime
+
+    
+    b = sys.getsizeof(maxSubArraySum)
 
     print ("Maximum contiguous sum is %d"%(max_so_far))
-    print ("Starting Index %d"%(start))
-    print ("Ending Index %d"%(end))
-    print(end - start)
+    print("Elapsed time:", f'{run_time:.8f}', 'seconds')
+    print ("Memory Usage:", b, "bytes")
+
  
 # Driver program to test maxSubArraySum
 a = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]

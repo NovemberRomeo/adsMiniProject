@@ -1,12 +1,15 @@
 # Find the maximum possible sum in
 # arr[] auch that arr[m] is part of it
+from timeit import default_timer as timer
+
  
- 
+start = timer() 
 def maxCrossingSum(arr, l, m, h): # In this instance l represents the low point, m for mid point, h for high point
  
     # Include elements on left of mid.
     left_sum = -10000
     sm = 0
+  
  
     for i in range(m, l-1, -1):
         sm = sm + arr[i]
@@ -26,9 +29,10 @@ def maxCrossingSum(arr, l, m, h): # In this instance l represents the low point,
     # Return sum of elements on left and right of mid
     # returning only left_sum + right_sum will fail for [-2, 1]
     return max(left_sum + right_sum, left_sum, right_sum)
+  
  
  
-# Returns sum of maxium sum subarray in aa[l..h]
+# Returns sum of maxium sum subarray in a[l..h]
 def maxSubArraySum(arr, l, h):
  
     # Base Case: Only one element
@@ -46,13 +50,17 @@ def maxSubArraySum(arr, l, h):
     return max(maxSubArraySum(arr, l, m),
                maxSubArraySum(arr, m+1, h),
                maxCrossingSum(arr, l, m, h))
- 
- 
+end = timer() 
+
+run_time = ("{:.7f}".format(end - start))
+
 # Driver Code
 arr = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
 n = len(arr)
  
 max_sum = maxSubArraySum(arr, 0, n-1)
+
+
+
 print("Maximum contiguous sum is ", max_sum)
- 
-# This code is contributed by Nikita Tiwari.
+print("Elapsed time:", run_time,"seconds")
